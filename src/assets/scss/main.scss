@@ -1,5 +1,5 @@
 $white: #fff;
-$gray: rgb(158, 158, 158);
+$gray: rgb(189, 189, 189);
 
 $bg-color-from: #8ec5fc;
 $bg-color-to: #e0c3fc;
@@ -51,7 +51,7 @@ ul, li {
     &__create-box {
         display: flex;
         background: $white;
-        height: 45px;
+        height: 46px;
     }
     &__input {
         flex-grow: 1;
@@ -85,7 +85,7 @@ ul, li {
         }
     }
     &__task {
-        padding: 5px 0 5px 10px;
+        padding: 5px 0 5px 5px;
         align-self: center;
         overflow-y: hidden;
         word-wrap: wrap;
@@ -101,9 +101,9 @@ ul, li {
     line-height: 1;
     &-add {
         background: $btn-add-color;  
-        width: 35px;
-        height: 35px;
-        margin-top:5px;
+        width: 30px;
+        height: 30px;
+        align-self: center;
         margin-right: 5px;
         &[wobble='1'] {
             animation: btn-click 0.2s 1;
@@ -125,7 +125,7 @@ ul, li {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 20px;
+            width: 50%;
             height: 2px;
             background: $white;
         }
@@ -152,8 +152,8 @@ ul, li {
     &-done {
         background: $white;
         &::before {
-            width: 25px;
-            height: 25px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             border: 3px solid $btn-done-color;
         }
@@ -161,14 +161,14 @@ ul, li {
     &-incompleted {
         background: $white;
         &::before {
-            width: 25px;
-            height: 25px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             border: 3px solid $btn-done-color;
         }
         &::after {
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             background: $btn-done-color;
         }
