@@ -1,26 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './assets/scss/main.scss';
+import CreateTaskForm from './compontents/CreateTaskForm/CreateTaskForm';
+import TasksList from './compontents/TasksList/TasksList';
+
+const  App = () => {
+	const [inputValue, setInputValue] = useState('');
+	const [tasks, setTasks] = useState([]);
+
+	const getLocalTasks = () => {	
+		if (localStorage.getItem("tasks") === null) {
+			localStorage.setItem("tasks", JSON.stringify([]));
+		} else {
+			const localTasks = JSON.parse(localStorage.getItem("tasks"));
+			setTasks(localTasks);
+		}
+	};
+
+	useEffect(() => {
+		getLocalTasks();
+	}, []);
+
+	useEffect(() => {
+		localStorage.setItem("tasks", JSON.stringify(tasks));
+	}, [tasks]);
+	
+
+	return (
+		<div className="App">
+			<div className="main">
+				<h1 className="main__title">
+					To Do
+				</h1>
+				<CreateTaskForm
+					inputValue={inputValue}
+					setInputValue={setInputValue}
+					setTasks={setTasks}
+					tasks={tasks} 
+				/>
+				<TasksList
+					tasks={tasks}
+					setTasks={setTasks}
+				/>
+			</div>
+		</div>
+	);
 }
 
 export default App;

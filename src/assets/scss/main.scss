@@ -1,0 +1,221 @@
+$white: #fff;
+
+$bg-color-to: rgb(72, 114, 88);
+$bg-color-from: rgb(140, 184, 147);
+
+$btn-add-color: rgb(50, 56, 109); 
+
+$btn-remove-color: rgb(209, 98, 98);
+$btn-remove-hover-color: rgb(214, 74, 74);
+
+$btn-done-color: rgb(59, 233, 16);
+$btn-done-hover-color: rgba(59, 233, 16, 0.74);
+
+* {
+    box-sizing: border-box;
+}
+
+button:active,
+button:focus {
+    outline: none;
+    border: none;
+}
+
+ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.App {
+    display: grid;
+    place-items: start center;
+    background: linear-gradient(135deg,
+        $bg-color-from 20%,
+        $bg-color-to);
+    min-height: 100vh;
+}
+
+.main {
+    display: grid;
+    grid-template-rows: repeat(2, 100px) 1fr;
+    align-items: center;
+    width: 100vw;
+    min-height: 100vh;
+    @media (min-width: 650px) {
+        width: 600px;
+    }
+    &__title {
+        font-size: 50px;
+        font-weight: 700;
+        color: $white;
+        text-align: center;
+        text-transform: uppercase;
+
+    }
+    &__create-box {
+        display: flex;
+    }
+    &__input {
+        flex-grow: 1;
+        margin-right: 10px;
+        padding: 0 10px;
+        height: 45px;
+        font-size: 20px;
+        border: none;
+        margin-bottom: 30px;
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+.tasks-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 40px;
+    row-gap: 10px;
+    align-self: start;
+    margin-bottom: 30px;
+    &__item {
+        display: grid;
+        grid-template-columns: 1fr 40px 40px;
+        align-items: stretch;
+        background: $white;
+        &_completed {
+            background: rgb(199, 199, 199);
+            text-decoration: line-through;
+        }
+    }
+    &__task {
+        padding-left: 10px;
+        align-self: center;
+        overflow-y: hidden;
+    }
+}
+
+.btn {
+    border: none;
+    color: $white;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1;
+    &-add {
+        background: $btn-add-color;  
+        width: 45px;
+        height: 45px;
+        &[wobble='1'] {
+            animation: btn-click 0.2s 1;
+        }
+         &[wobblereject='1'] {
+            animation: btn-click-reject 0.3s 1;
+        }
+    }
+    &-remove,
+    &-done,
+    &-incompleted,
+    &-add  {
+        font-size: 0;
+        position: relative;
+        &::before,
+        &::after {
+            content: '';
+            display: flex;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 2px;
+            background: $white;
+        }
+        &::before {
+            transform: translate(-50%, -50%);
+        }
+        &::after {
+            transform: translate(-50%, -50%) rotate(90deg);
+        }
+    }
+    &-remove {
+        background: $btn-remove-color;
+        &:hover {
+            background: $btn-remove-hover-color;
+        }
+        &::before {
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+        &::after {
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+    }
+    &-done {
+        background: $btn-done-color;
+        &:hover {
+            background: $btn-done-hover-color;
+        }
+        &::before {
+            width: 10px;
+            transform: translate(-50%, -50%) translate(-5px, 5px) rotate(45deg);
+        }
+        &::after {
+            transform: translate(-50%, -50%) translate(5px) rotate(-45deg);
+        }
+    }
+    &-incompleted {
+        background: rgb(158, 104, 104);
+        &:hover {
+            background: rgba(158, 104, 104, 0.849);
+        }
+        &::before {
+            width: 10px;
+            transform: translate(-50%, -50%) translate(-5px, 5px) rotate(45deg);
+        }
+        &::after {
+            transform: translate(-50%, -50%) translate(5px) rotate(-45deg);
+        }
+    }
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+@keyframes btn-click {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.8);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes btn-click-reject {
+    0% {
+        transform: rotate(0deg);
+    }
+    12% {
+        transform: rotate(-12deg);
+    }
+    24% {
+        transform: rotate(0deg);
+    }
+    36% {
+        transform: rotate(12deg);
+    }
+    48% {
+        transform: rotate(0deg);
+    }
+    60% {
+        transform: rotate(-6deg);
+    }
+    72% {
+        transform: rotate(0deg);
+    }
+    84% {
+        transform: rotate(6deg);
+    }
+    96% {
+        transform: rotate(0deg);
+    }
+}
