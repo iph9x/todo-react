@@ -24,10 +24,10 @@ const  TaskItem = ({ taskName, id, completed, tasks, setTasks }) => {
         <li 
             className={!completed ? "tasks-list__item" : "tasks-list__item tasks-list__item_completed"}
         >
-            <span className="tasks-list__task">{taskName}</span>
             <button type="button" onClick={completeHandler} className={!completed ? "btn-done btn" : "btn-incompleted btn"}>
                 D
             </button>      
+            <span className="tasks-list__task">{taskName}</span>
             <button className="btn-remove btn" type="button" onClick={deleteHandler}>D</button>
         </li>
     );
