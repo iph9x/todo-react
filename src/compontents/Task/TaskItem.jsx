@@ -1,6 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const  TaskItem = ({ taskName, id, completed, tasks, setTasks }) => {
+    const [editMode, setEditMode] = useState(false);
+    const [value, setValue] = useState(taskName);
+
+    const changeHandler = (e) => {
+        const currentValue = e.target.value;
+        setValue(currentValue);
+    }
+
+    const blurHandler = () => {
+        const changedTasks = tasks.map(task => {
+            if (task.id === id) {
+                return ({ ...task, name: value })
+            }
+            return task;
+        });
+
+        setTasks(changedTasks.sort((a, b) => b.completed - a.completed));
+        setEditMode(false);
+    }
+
     const completeHandler = () => {
         const changedTasks = tasks.map(task => {
             if (task.id === id) {
@@ -9,10 +29,7 @@ const  TaskItem = ({ taskName, id, completed, tasks, setTasks }) => {
             return task;
         });
 
-        const currentTasks = changedTasks.filter(task => !task.completed);
-        const completedTasks = changedTasks.filter(task => task.completed).reverse();
-
-        setTasks(currentTasks.concat(completedTasks));
+        setTasks(changedTasks.sort((a, b) => b.completed - a.completed));
     }
 
     const deleteHandler = () => {
@@ -21,13 +38,17 @@ const  TaskItem = ({ taskName, id, completed, tasks, setTasks }) => {
     }
   
     return (
-        <li 
-            className={!completed ? "tasks-list__item" : "tasks-list__item tasks-list__item_completed"}
-        >
+        <li className="tasks-list__item">
             <button type="button" onClick={completeHandler} className={!completed ? "btn-done btn" : "btn-incompleted btn"}>
                 D
-            </button>      
-            <span className="tasks-list__task">{taskName}</span>
+            </button>
+            {!editMode
+                ? <span onClick={() => setEditMode(true)} className={!completed ? "tasks-list__task" :"tasks-list__task tasks-list__task_completed" }>{taskName}</span>
+                : <input 
+                autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"
+                autoFocus={true} onBlur={blurHandler} onChange={changeHandler} 
+                className="tasks-list__task tasks-list__edit" value={value} />
+            }   
             <button className="btn-remove btn" type="button" onClick={deleteHandler}>D</button>
         </li>
     );

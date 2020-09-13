@@ -5,7 +5,6 @@ import TaskItem from '../Task/TaskItem';
 const  TasksList = ({ tasks, setTasks }) => {
 	const tasksArr = [...tasks]
 		.reverse()
-		.sort((x, y) => x.completed - y.completed)
 		.map((task) => (
 		<TaskItem 
 			taskName={task.name}

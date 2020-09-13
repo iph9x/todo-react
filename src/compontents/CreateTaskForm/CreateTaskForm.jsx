@@ -15,7 +15,7 @@ const  CreateTaskForm = ({ inputValue, setInputValue, setTasks, tasks, setPopup 
 
         if (inputValue !== '') {
             const newArr = [...tasks, {name: inputValue, id: Math.floor(Math.random() * 100000), completed: false}];
-            setTasks(newArr.sort((x, y) => x.completed - y.completed));
+            setTasks(newArr.sort((a, b) => b.completed - a.completed));
 
             setWobble(1);
             setInputValue('');
