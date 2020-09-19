@@ -12,12 +12,16 @@ $btn-done-color: #fb5271;
     box-sizing: border-box;
 }
 
+input,
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
 input:active,
 button:active,
 button:focus {
     outline: none;
     border: none;
-    -webkit-tap-highlight-color: transparent;
 }
 
 ul, li {
