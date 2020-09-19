@@ -16,6 +16,7 @@ button:active,
 button:focus {
     outline: none;
     border: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 ul, li {
