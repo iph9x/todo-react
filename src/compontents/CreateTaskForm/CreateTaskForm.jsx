@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const  CreateTaskForm = ({ inputValue, setInputValue, setTasks, tasks, setPopup }) => {
+const  CreateTaskForm = ({ inputValue, setInputValue, setTasks, tasks }) => {
     const [wobble, setWobble] = useState(0);
     const [wobblereject, setWobbleReject] = useState(0);
  
